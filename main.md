@@ -29,18 +29,20 @@ For each section, we'll look at published examples and point towards available i
 
 # A rough taxonomy of tissue models
 
+https://hdl.handle.net/11245/1.394902
+
 ## Population dynamics
 
-:::incremental
+:::incremental:::
 * Only concerned with $N(t)$
-* Focus on **signaling** and division / death rates
+* Focus on **signaling** and growth / death rates
 * Main use is **mathematical oncology**:
   predict cancer growth in response to treatment
 ::::
 
 ---------
 
-![[[@zhaoModelingTumorClonal2016]](https://doi.org/10.1016/j.trecan.2016.02.001)](images/pop_dyn.jpg){ width=800px }
+![[[@zhaoModelingTumorClonal2016]](https://doi.org/10.1016/j.trecan.2016.02.001)](images/pop_dyn.jpg){ width=80% }
 
 
 
@@ -48,14 +50,57 @@ For each section, we'll look at published examples and point towards available i
 
 ## Agent based modelling
 
+:::incremental::::
+* Cells are **agents**: they _act_
+* Follow each cell behavior
+* Broad range of problems:
+  - cancer
+  - morphogenesis
+:::::
+
 
 # Lattice based models
 
+> Models are defined on a fixed grid
+
 ## Game of life
+(James Conway)
+
+* Not really cells, but Cellular Automata
+* Classical 'emergent behavior' system
+
+![Game of life](images/gol.gif){ width=50% }
+
+> [A fun example of cellular automata](https://distill.pub/2020/growing-ca/)
 
 ## The Graner Glazier Hogeweg model
 
+
+::::::.columns:::
+:::.column::::
+:::incremental::::
+* The world is a fixed grid
+* Each cell occupies a set of pixels
+::::
+::::
+:::.column::::
+
+
+. . .
+
+The behavior is governed by the definition of a **Hamiltonian** governing the energy of the cells
+
+Changes follow a simple local algorithm:
+
+----------
+
+
+
+
+
 ### The Modified Metropolis Algorithm
+
+
 
 ### Cellular Potts Model Hamiltonian
 
