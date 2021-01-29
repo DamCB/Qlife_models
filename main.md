@@ -7,29 +7,31 @@ width: 1080
 height: 800
 bibliography: tyssue.bib
 data-transition: none
-center: 0
+center: 1
+abstract:
+    "In this second part of the course, we will go over the various methods used to simulate tissues.
+    We will start by showing a rough taxonomy of cell models in general and we'll briefly discuss the general framework of agent-based modelling.  Then we will see in some details the three big classes of tissue modeling strategies:
+    1. Lattice based models rely on a descretized space to simulate cells. Each cell here occupies a set of pixels, and the physics of the system is solved locally. Those model are adapted to rapid assessment of tissue dynamics with mixed cell types, proliferation and differentiation models.
+    2. Cell-center based models. Here each cell is an individual sphere (maybe deformable) interacting in free space with it's immediate neighbours. This class of model is adapted to problems in cancer biology, involving high cell numbers.
+    4. Vertex-based models. Here cells are delinated by polygons or polyhedron, and the phyics is applied at the polygon vertices. This class of models is widely used for morphogenesis modeling.
+    For each section, we'll look at published examples and point towards available implementations."
 ...
 
 
 
-# Abstract
-
-In this second part of the course, we will go over the various methods used to simulate tissues.
-
-We will start by showing a rough taxonomy of cell models in general and we'll briefly discuss the general framework of agent-based modelling.  Then we will see in some details the three big classes of tissue modeling strategies:
-
-1. Lattice based models rely on a descretized space to simulate cells. Each cell here occupies a set of pixels, and the physics of the system is solved locally. Those model are adapted to rapid assessment of tissue dynamics with mixed cell types, proliferation and differentiation models.
-
-2. Cell-center based models. Here each cell is an individual sphere (maybe deformable) interacting in free space with it's immediate neighbours. This class of model is adapted to problems in cancer biology, involving high cell numbers.
-
-4. Vertex-based models. Here cells are delinated by polygons or polyhedron, and the phyics is applied at the polygon vertices. This class of models is widely used for morphogenesis modeling.
-
-For each section, we'll look at published examples and point towards available implementations.
-
 
 # A rough taxonomy of tissue models
 
-https://hdl.handle.net/11245/1.394902
+::::::{.columns}:::
+:::{.column width=30%}
+![](images/tamulonis.png)
+:::
+:::{.column width=70%}
+\vspace{2cm}
+This courses relies a lot on Carlos Tamulonis' [PhD Thesis](https://hdl.handle.net/11245/1.394902) (2013)
+:::
+::::::
+
 
 ## Population dynamics
 
@@ -46,8 +48,6 @@ https://hdl.handle.net/11245/1.394902
 
 
 
-
-
 ## Agent based modelling
 
 :::incremental::::
@@ -61,7 +61,8 @@ https://hdl.handle.net/11245/1.394902
 
 # Lattice based models
 
-> Models are defined on a fixed grid
+
+![Discrete space in 2 and 3D](images/grids.png)
 
 ## Game of life
 (James Conway)
@@ -71,42 +72,125 @@ https://hdl.handle.net/11245/1.394902
 
 ![Game of life](images/gol.gif){ width=50% }
 
-> [A fun example of cellular automata](https://distill.pub/2020/growing-ca/)
+. . .
+
+Follow [this link](https://distill.pub/2020/growing-ca/) for a fun example of cellular automata
 
 ## The Graner Glazier Hogeweg model
 
 
-::::::.columns:::
-:::.column::::
+:::::::::{.columns}:::
+:::{.column width=60%}::::
 :::incremental::::
+\vspace{1cm}
 * The world is a fixed grid
-* Each cell occupies a set of pixels
+* Each cell $\alpha$ occupies a set of pixels
+* Pixels at the interface can swap cells
 ::::
 ::::
-:::.column::::
+:::{.column width=40%}::::
+![step n](images/CPM00.png){ width=60% }
 
-
-. . .
-
-The behavior is governed by the definition of a **Hamiltonian** governing the energy of the cells
-
-Changes follow a simple local algorithm:
-
-----------
-
-
-
+:::
+:::::::
 
 
 ### The Modified Metropolis Algorithm
 
 
+The behavior is governed by the definition of a **Hamiltonian** $H$ governing the energy of the cells
+
+Changes follow a simple local algorithm:
+
+:::::::::{.columns}:::
+:::{.column width=60%}::::
+:::incremental
+1. Choose randomly a site $(i, j)$
+2. Compute the change $\Delta H$ if $(i, j)$ swaps cell
+3. If $\Delta H < 0$ : swap cell
+4. If $\Delta H \geq 0$ : swap cell with probability $\exp( - \Delta H / kT)$ _(T is not a "real" temperature)_
+
+:::
+::::
+:::{.column width=40%}::::
+![step n](images/CPM00.png){ width=60% }
+
+. . .
+
+![step n+1](images/CPM01.png){ width=60% }
+:::
+:::::::
+
 
 ### Cellular Potts Model Hamiltonian
 
-### Extending the CPM: the example of Chemotaxis
+The game is now to define the Hamiltonian to better reflect our problem!
+
+. . .
+
+The simplest model: volume conservation and adhesion:
+
+
+\begin{align*}
+H & = & H_V + H_i \\
+H_V & = & \frac{\lambda}{2} \sum_\alpha (V_\alpha - V_0)^2 \\
+H_i & = & \sum_{ij, i'j'} J \left( \tau(ij), \tau(i'j') \right)
+\end{align*}
+
+$\tau(ij)$ type of cell at $ij$
+
+$J\left(\tau(ij), \tau(i'j')\right)$ : bond energy
+
+----
+
+#### Cell sorting
+
+A classical problem:
+
+2 cell types $(1, 2)$ --- $0$ is the medium
+
+\begin{eqnarray*}
+J(1, 1) & = & 0\\
+J(1, 1) & = & 1\\
+J(2, 2) & = & 8\\
+J(2, 1) & = & 16\\
+J(1, 0) & = &  J(2, 0) = 32
+\end{eqnarray*}
+
+. . .
+
+Contact prefered between same type, 1 more so than 2
+
+
+----
+
+What happens?
+
+. . .
+
+![Cell sorting in CompuCell3D](images/CC3D.png)
+
+
+
+#### Chemotaxis
+
+* Add a term for chemotaxis:
+- chemoatractant distribution on the grid ($C(ij)$)
+- pixel energy inversely $ \propto \Dela C$
+
+$$
+H' = H - \mu \left(C(ij) - C(i'j') \right)
+$$
+
+
+#### More recent exemple
+
 
 ### Existing Software
+
+- Chaste
+- CompuCell3D
+- Morpheus
 
 
 # Cells as spheres
