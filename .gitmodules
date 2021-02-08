@@ -1,0 +1,3 @@
+[submodule "Workshop-Cell-Dynamics-WS"]
+	path = Workshop-Cell-Dynamics-WS
+	url = git@github.com:sophietheis/Workshop-Cell-Dynamics-WS.git
