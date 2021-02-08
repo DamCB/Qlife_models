@@ -5,6 +5,7 @@ subtitle: Part II - Numerical Simulations
 fontsize: 10pt
 width: 1080
 height: 800
+font-size: 10pt
 bibliography: tyssue.bib
 data-transition: none
 center: 1
@@ -17,8 +18,7 @@ abstract:
     For each section, we'll look at published examples and point towards available implementations."
 ...
 
-
-
+------
 
 # A rough taxonomy of tissue models
 
@@ -32,6 +32,10 @@ This courses relies a lot on Carlos Tamulonis' [PhD Thesis](https://hdl.handle.n
 :::
 ::::::
 
+
+------
+
+![An (incomplete) tree of models of living tissues](images/models_family_tree.png)
 
 ## Population dynamics
 
@@ -172,19 +176,29 @@ What happens?
 
 
 
-#### Chemotaxis
+### Chemotaxis
 
-* Add a term for chemotaxis:
+Add a term for chemotaxis:
+
 - chemoatractant distribution on the grid ($C(ij)$)
-- pixel energy inversely $ \propto \Dela C$
+- Favor switch for increasing $C$:
 
 $$
 H' = H - \mu \left(C(ij) - C(i'j') \right)
 $$
 
+* The chemoatractant can be *produced* by the cells (cAMP)
 
-#### More recent exemple
+. . .
 
+:::{.columns}::::
+:::{.column width=30%}
+![Dictyostelium Aggregation](images/Dictyostelium_Aggregation.JPG)
+:::
+:::{.column width=70%}
+![[@savillModellingMorphogenesisSingle1997]](images/SavillHogweg.png)
+:::
+::::::
 
 ### Existing Software
 
@@ -195,9 +209,78 @@ $$
 
 # Cells as spheres
 
-## The work of Dirk Drasdo et al.
+![A ball pit](images/ballpit.jpeg){ width=60% }
 
-## JF. Joanny
+- Cells are defined by their position in free space
+- Movement goverened by Newton:
+
+$$
+\sum F = m a \approx 0
+$$
+
+- Forces:
+  * Cell-cell interactions
+  * Fluid mechanics interactions with the medium
+
+
+
+## Mechanical impact of cell dynamics
+
+![Cells as dipoles @ranftFluidizationTissuesCell2010](images/joanny_model.png)
+
+------
+
+- Cell-cell interactions:
+
+$$
+V^{CC}(r) = \begin{cases}
+    \frac{f_0 R_{pp}^5}{4r_k^4} + (f_0 + f_1) r_k - (1.25 f_0 + f_1) &\quad r_k \leq R_{pp}\\
+    0 &\quad r_k > R_{pp}\\
+    \end{cases}
+$$
+
+. . .
+
+![](images/joanny_curve.png){ width=30% }
+
+. . .
+
+- Self-interaction (growth):
+
+$$
+V^G(r) = \frac{B}{r_i + r_0}
+$$
+
+----
+
+
+![Fluidization [@ranftFluidizationTissuesCell2010]](images/joanny.png)
+
+> Due to proliferation and death, cell aggreagate behaces as a fluid
+
+
+## Modeling tumors
+
+- Spheres with adhesion and repulsion
+
+![[@drasdoSinglecellbasedModelTumor2005]](images/drasdo1.png){ width=60% }
+
+- Same Metropolis alorithm as GGH:
+
+$$
+P(\delta r) = \min \{ 1, \exp \frac{V(t + dt) - V(t)}{F_T} \}
+$$
+
+## Mixed resolution models
+
+- Deformable cells at high resolution meshes mixed with cell-based model
+
+![[@vanliedekerkeQuantitativeHighresolutionComputational2020]](images/drasdo2.png)
+
+- Complex continuous / fluid dynamics finite elements for cells
+- Very "realistic" results
+- High computational cost
+
 
 ## PhysiCell (Mathematical Oncology)
 
