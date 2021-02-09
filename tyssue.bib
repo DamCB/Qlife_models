@@ -859,6 +859,42 @@
   number = {1}
 }
 
+@article{ghaffarizadehPhysiCellOpenSource2017,
+  title = {{{PhysiCell}}: An {{Open Source Physics}}-{{Based Cell Simulator}} for 3-{{D Multicellular Systems}}},
+  shorttitle = {{{PhysiCell}}},
+  author = {Ghaffarizadeh, Ahmadreza and Heiland, Randy and Friedman, Samuel H. and Mumenthaler, Shannon M. and Macklin, Paul},
+  date = {2017-12-21},
+  journaltitle = {bioRxiv},
+  pages = {088773},
+  publisher = {{Cold Spring Harbor Laboratory}},
+  doi = {10.1101/088773},
+  url = {https://www.biorxiv.org/content/10.1101/088773v4},
+  urldate = {2021-02-09},
+  abstract = {{$<$}h3{$>$}Abstract{$<$}/h3{$>$} {$<$}p{$>$}Many multicellular systems problems can only be understood by studying how cells move, grow, divide, interact, and die. Tissue-scale dynamics emerge from systems of many interacting cells as they respond to and influence their microenvironment. The ideal “virtual laboratory” for such multicellular systems simulates both the biochemical microenvironment (the “stage”) and many mechanically and biochemically interacting cells (the “players” upon the stage).{$<$}/p{$><$}p{$>$}PhysiCell—physics-based multicellular simulator—is an open source agent-based simulator that provides both the stage and the players for studying many interacting cells in dynamic tissue microenvironments. It builds upon a multi-substrate biotransport solver to link cell phenotype to multiple diffusing substrates and signaling factors. It includes biologically-driven sub-models for cell cycling, apoptosis, necrosis, solid and fluid volume changes, mechanics, and motility “out of the box.” The C++ code has minimal dependencies, making it simple to maintain and deploy across platforms. PhysiCell has been parallelized with OpenMP, and its performance scales linearly with the number of cells. Simulations up to 10\textsuperscript{5}-10\textsuperscript{6} cells are feasible on quad-core desktop workstations; larger simulations are attainable on single HPC compute nodes.{$<$}/p{$><$}p{$>$}We demonstrate PhysiCell by simulating the impact of necrotic core biomechanics, 3-D geometry, and stochasticity on the dynamics of hanging drop tumor spheroids and ductal carcinoma in situ (DCIS) of the breast. We demonstrate stochastic motility, chemical and contact-based interaction of multiple cell types, and the extensibility of PhysiCell with examples in synthetic multicellular systems (a “cellular cargo delivery” system, with application to anti-cancer treatments), cancer heterogeneity, and cancer immunology. PhysiCell is a powerful multicellular systems simulator that will be continually improved with new capabilities and performance improvements. It also represents a significant independent code base for replicating results from other simulation platforms. The PhysiCell source code, examples, documentation, and support are available under the BSD license at http://PhysiCell.MathCancer.org and http://PhysiCell.sf.net.{$<$}/p{$><$}h3{$>$}Author Summary{$<$}/h3{$>$} {$<$}p{$>$}This paper introduces PhysiCell: an open source, agent-based modeling framework for 3-D multicellular simulations. It includes a standard library of sub-models for cell fluid and solid volume changes, cycle progression, apoptosis, necrosis, mechanics, and motility. PhysiCell is directly coupled to a biotransport solver to simulate many diffusing substrates and cell-secreted signals. Each cell can dynamically update its phenotype based on its microenvironmental conditions. Users can customize or replace the included sub-models.{$<$}/p{$><$}p{$>$}PhysiCell runs on a variety of platforms (Linux, OSX, and Windows) with few software dependencies. Its computational cost scales linearly in the number of cells. It is feasible to simulate 500,000 cells on quad-core desktop workstations, and millions of cells on single HPC compute nodes. We demonstrate PhysiCell by simulating the impact of necrotic core biomechanics, 3-D geometry, and stochasticity on hanging drop tumor spheroids (HDS) and ductal carcinoma in situ (DCIS) of the breast. We demonstrate contact- and chemokine-based interactions among multiple cell types with examples in synthetic multicellular bioengineering, cancer heterogeneity, and cancer immunology.{$<$}/p{$><$}p{$>$}We developed PhysiCell to help the scientific community tackle multicellular systems biology problems involving many interacting cells in multi-substrate microenvironments. PhysiCell is also an independent, cross-platform codebase for replicating results from other simulators.{$<$}/p{$>$}},
+  file = {/home/guillaume/Zotero/storage/WRB5SKCE/Ghaffarizadeh et al. - 2017 - PhysiCell an Open Source Physics-Based Cell Simul.pdf;/home/guillaume/Zotero/storage/L5SYEZW6/088773v4.html},
+  langid = {english}
+}
+
+@article{ghaffarizadehPhysiCellOpenSource2018,
+  title = {{{PhysiCell}}: {{An}} Open Source Physics-Based Cell Simulator for 3-{{D}} Multicellular Systems},
+  shorttitle = {{{PhysiCell}}},
+  author = {Ghaffarizadeh, Ahmadreza and Heiland, Randy and Friedman, Samuel H. and Mumenthaler, Shannon M. and Macklin, Paul},
+  date = {2018-02-23},
+  journaltitle = {PLOS Computational Biology},
+  volume = {14},
+  pages = {e1005991},
+  publisher = {{Public Library of Science}},
+  issn = {1553-7358},
+  doi = {10.1371/journal.pcbi.1005991},
+  url = {https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005991},
+  urldate = {2021-02-09},
+  abstract = {Many multicellular systems problems can only be understood by studying how cells move, grow, divide, interact, and die. Tissue-scale dynamics emerge from systems of many interacting cells as they respond to and influence their microenvironment. The ideal “virtual laboratory” for such multicellular systems simulates both the biochemical microenvironment (the “stage”) and many mechanically and biochemically interacting cells (the “players” upon the stage). PhysiCell—physics-based multicellular simulator—is an open source agent-based simulator that provides both the stage and the players for studying many interacting cells in dynamic tissue microenvironments. It builds upon a multi-substrate biotransport solver to link cell phenotype to multiple diffusing substrates and signaling factors. It includes biologically-driven sub-models for cell cycling, apoptosis, necrosis, solid and fluid volume changes, mechanics, and motility “out of the box.” The C++ code has minimal dependencies, making it simple to maintain and deploy across platforms. PhysiCell has been parallelized with OpenMP, and its performance scales linearly with the number of cells. Simulations up to 105-106 cells are feasible on quad-core desktop workstations; larger simulations are attainable on single HPC compute nodes. We demonstrate PhysiCell by simulating the impact of necrotic core biomechanics, 3-D geometry, and stochasticity on the dynamics of hanging drop tumor spheroids and ductal carcinoma in situ (DCIS) of the breast. We demonstrate stochastic motility, chemical and contact-based interaction of multiple cell types, and the extensibility of PhysiCell with examples in synthetic multicellular systems (a “cellular cargo delivery” system, with application to anti-cancer treatments), cancer heterogeneity, and cancer immunology. PhysiCell is a powerful multicellular systems simulator that will be continually improved with new capabilities and performance improvements. It also represents a significant independent code base for replicating results from other simulation platforms. The PhysiCell source code, examples, documentation, and support are available under the BSD license at http://PhysiCell.MathCancer.org and http://PhysiCell.sf.net.},
+  file = {/home/guillaume/Zotero/storage/V53WZ8C7/Ghaffarizadeh et al. - 2018 - PhysiCell An open source physics-based cell simul.pdf;/home/guillaume/Zotero/storage/9IU9RRPT/article.html},
+  keywords = {Apoptosis,Biochemical simulations,Biophysical simulations,Cancers and neoplasms,Cell cycle and cell division,Cell motility,Malignant tumors,Necrosis},
+  langid = {english},
+  number = {2}
+}
+
 @article{goldstone_tip1/clip-170_2010,
   title = {Tip1/{{CLIP}}-170 Protein Is Required for Correct Chromosome Poleward Movement in Fission Yeast},
   author = {Goldstone, S and Reyes, C and Gay, G and Courthéoux, T and Dubarry, M and Tournier, S and Gachet, Y},

@@ -284,26 +284,67 @@ $$
 
 ## PhysiCell (Mathematical Oncology)
 
+[Physicell](https://physicell.wordpress.com/about-2/) is a very powerfull simulation toolkit
+
+![[@ghaffarizadehPhysiCellOpenSource2018]](images/PhysiCell.png)
+
+-----
+
+* Friction and adhesion model
+* Very multi-agent oriented
+* Coupled with a powerfull reaction / diffusion solver,
+  [BioFMV](http://biofvm.mathcancer.org/)
+
 
 # Cells as polygons
 
+The apical junctions meshworks play a central role in many
+morphogenesis events [@lecuit_cell_2007] and are poorly rendered by cell center models.
+
+![Apical junctions in Drosophila leg disk](legdisck_apical.jpeg)
+
+
+
 ## Topology of epithelium
 
-### Voronoï tessalation (Honda et al.)
+### Voronoï tessalation [@hondaThreedimensionalVertexDynamics2004]
 
-### Topology changes in 2D & 3D
+Instead of focusing on the cell centers, we now look at the contact between junctions
 
-### Active vertex model
+![Voronoi tessalation](images/tessalation.gif)
 
-### Rosettes
+-----
+
+When distances between the centers change, the tessalation changes.
+
+![Type 1 transition](images/t1_transition.png)
+
+> **Problem** we can have oscilating
+
+* Solution 1 : The active vertex model : Consider the Delaunay
+triangulation instead of it's dual [@bartonActiveVertexModel2016], and
+compute it at every step
+
+* Solution 2 : Allow for more than 3 way vertices! [@fineganTricellularVertexspecificAdhesion2019]
 
 
 ## Mechanical Model formulations
 
-### Work by Farhadifar et al.
+### 2D Models
 
-### Work by Lisa Manning et al.
+* [@farhadifar_influence_2007]
+
+
+* [@biDensityindependentRigidityTransition2015]
+
+### 3D Models
+
+*
+
 
 ### Towards rheological models
 
 ### Existing implementations
+
+* Chaste
+* Tyssue
