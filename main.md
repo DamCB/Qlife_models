@@ -18,74 +18,64 @@ abstract:
     For each section, we'll look at published examples and point towards available implementations."
 ...
 
-------
 
 # A rough taxonomy of tissue models
 
+------
+
+
 ::::::{.columns}:::
-:::{.column width=30%}
-![](images/tamulonis.png)
-:::
 :::{.column width=70%}
 \vspace{2cm}
-This courses relies a lot on Carlos Tamulonis' [PhD Thesis](https://hdl.handle.net/11245/1.394902) (2013)
+This courses relies a lot on Carlos Tamulonis'
+
+[PhD Thesis](https://hdl.handle.net/11245/1.394902) (2013)
+:::
+:::{.column width=30%}
+![](images/tamulonis.png)
 :::
 ::::::
 
 
 ------
 
-![An (incomplete) tree of models of living tissues](images/models_family_tree.png)
 
-## Population dynamics
-
-:::incremental:::
-* Only concerned with $N(t)$
-* Focus on **signaling** and growth / death rates
-* Main use is **mathematical oncology**:
-  predict cancer growth in response to treatment
-::::
-
----------
-
-![[[@zhaoModelingTumorClonal2016]](https://doi.org/10.1016/j.trecan.2016.02.001)](images/pop_dyn.jpg){ width=80% }
-
-
-
-## Agent based modelling
-
-:::incremental::::
-* Cells are **agents**: they _act_
-* Follow each cell behavior
-* Broad range of problems:
-  - cancer
-  - morphogenesis
-:::::
+![An (incomplete) tree of models of living tissues](images/models_family_tree.png){ width=70% }
 
 
 # Lattice based models
 
-
 ![Discrete space in 2 and 3D](images/grids.png)
 
-## Game of life
-(James Conway)
 
-* Not really cells, but Cellular Automata
-* Classical 'emergent behavior' system
-
-![Game of life](images/gol.gif){ width=50% }
-
-. . .
-
-Follow [this link](https://distill.pub/2020/growing-ca/) for a fun example of cellular automata
-
-## The Graner Glazier Hogeweg model
+### Conway's Game of life
 
 
 :::::::::{.columns}:::
 :::{.column width=60%}::::
-:::incremental::::
+::: incremental
+* Not really cells, but Cellular Automata
+
+* Classical 'emergent behavior' system
+
+* See [distill.pub/2020/growing-ca](https://distill.pub/2020/growing-ca/) for a fun example of cellular automata
+
+::::
+::::
+:::{.column width=40%}::::
+
+![Game of life](images/gol.gif){ width=50% }
+
+:::
+:::::::
+
+
+### The Graner Glazier Hogeweg model
+
+
+:::::::::{.columns}:::
+:::{.column width=60%}::::
+::: incremental
 \vspace{1cm}
 * The world is a fixed grid
 * Each cell $\alpha$ occupies a set of pixels
@@ -93,8 +83,7 @@ Follow [this link](https://distill.pub/2020/growing-ca/) for a fun example of ce
 ::::
 ::::
 :::{.column width=40%}::::
-![step n](images/CPM00.png){ width=60% }
-
+![GGH grid](images/CPM00.png){ width=60% }
 :::
 :::::::
 
@@ -104,11 +93,11 @@ Follow [this link](https://distill.pub/2020/growing-ca/) for a fun example of ce
 
 The behavior is governed by the definition of a **Hamiltonian** $H$ governing the energy of the cells
 
-Changes follow a simple local algorithm:
-
 :::::::::{.columns}:::
 :::{.column width=60%}::::
-:::incremental
+Changes follow a local algorithm:
+
+::: incremental
 1. Choose randomly a site $(i, j)$
 2. Compute the change $\Delta H$ if $(i, j)$ swaps cell
 3. If $\Delta H < 0$ : swap cell
@@ -117,11 +106,15 @@ Changes follow a simple local algorithm:
 :::
 ::::
 :::{.column width=40%}::::
-![step n](images/CPM00.png){ width=60% }
 
-. . .
+::: incremental
 
-![step n+1](images/CPM01.png){ width=60% }
+- ![step n](images/CPM00.png){ width=60% }
+
+
+- ![step n+1](images/CPM01.png){ width=60% }
+
+:::
 :::
 :::::::
 
@@ -149,38 +142,33 @@ $J\left(\tau(ij), \tau(i'j')\right)$ : bond energy
 
 #### Cell sorting
 
+:::{.columns}::::
+:::{.column width=70% }
+
 A classical problem:
 
 2 cell types $(1, 2)$ --- $0$ is the medium
 
 \begin{eqnarray*}
-J(1, 1) & = & 0\\
+J(0, 0) & = & 0\\
 J(1, 1) & = & 1\\
 J(2, 2) & = & 8\\
 J(2, 1) & = & 16\\
 J(1, 0) & = &  J(2, 0) = 32
 \end{eqnarray*}
 
-. . .
-
-Contact prefered between same type, 1 more so than 2
-
-
-----
-
-What happens?
-
-. . .
-
-![Cell sorting in CompuCell3D](images/CC3D.png)
-
-
+:::
+:::{.column width=30% }
+![](images/CC3D.png){ width=80% }
+:::
+:::::::
 
 ### Chemotaxis
 
 Add a term for chemotaxis:
 
 - chemoatractant distribution on the grid ($C(ij)$)
+
 - Favor switch for increasing $C$:
 
 $$
@@ -192,10 +180,10 @@ $$
 . . .
 
 :::{.columns}::::
-:::{.column width=30%}
+:::{.column width=30%}:::
 ![Dictyostelium Aggregation](images/Dictyostelium_Aggregation.JPG)
 :::
-:::{.column width=70%}
+:::{.column width=70%}:::
 ![[@savillModellingMorphogenesisSingle1997]](images/SavillHogweg.png)
 :::
 ::::::
@@ -209,41 +197,44 @@ $$
 
 # Cells as spheres
 
+:::{.columns}::::
+:::{.column width=40%}
 ![A ball pit](images/ballpit.jpeg){ width=60% }
-
+:::
+:::{.column width=60%}
+::: incremental
 - Cells are defined by their position in free space
-- Movement goverened by Newton:
-
+- Movement goverened by Newton's 2nd law:
 $$
 \sum F = m a \approx 0
 $$
-
 - Forces:
   * Cell-cell interactions
-  * Fluid mechanics interactions with the medium
+  * Friction with the medium
+:::
+:::
+::::::
 
 
+## Cells as dipoles
 
-## Mechanical impact of cell dynamics
+:::{.columns}:::
+:::{.column}:::
 
-![Cells as dipoles @ranftFluidizationTissuesCell2010](images/joanny_model.png)
+![](images/joanny_model.png)
 
-------
+![](images/joanny_curve.png)
 
+:::
+:::{.column}:::
 - Cell-cell interactions:
 
 $$
 V^{CC}(r) = \begin{cases}
-    \frac{f_0 R_{pp}^5}{4r_k^4} + (f_0 + f_1) r_k - (1.25 f_0 + f_1) &\quad r_k \leq R_{pp}\\
+    A R_{cc}^5 / r_k^4 + B r_k &\quad r_k \leq R_{pp}\\
     0 &\quad r_k > R_{pp}\\
     \end{cases}
 $$
-
-. . .
-
-![](images/joanny_curve.png){ width=30% }
-
-. . .
 
 - Self-interaction (growth):
 
@@ -251,12 +242,17 @@ $$
 V^G(r) = \frac{B}{r_i + r_0}
 $$
 
+:::
+::::::
+
+
+
 ----
 
 
 ![Fluidization [@ranftFluidizationTissuesCell2010]](images/joanny.png)
 
-> Due to proliferation and death, cell aggreagate behaces as a fluid
+> Due to proliferation and death, cell aggreagate behaves as a fluid
 
 
 ## Modeling tumors
@@ -268,7 +264,7 @@ $$
 - Same Metropolis alorithm as GGH:
 
 $$
-P(\delta r) = \min \{ 1, \exp \frac{V(t + dt) - V(t)}{F_T} \}
+P(\delta r) = \min \{ 1, \exp \frac{- (V(t + dt) - V(t))}{F_T} \}
 $$
 
 ## Mixed resolution models
@@ -277,7 +273,7 @@ $$
 
 ![[@vanliedekerkeQuantitativeHighresolutionComputational2020]](images/drasdo2.png)
 
-- Complex continuous / fluid dynamics finite elements for cells
+- Continuous / fluid dynamics finite elements for cells
 - Very "realistic" results
 - High computational cost
 
@@ -286,65 +282,201 @@ $$
 
 [Physicell](https://physicell.wordpress.com/about-2/) is a very powerfull simulation toolkit
 
-![[@ghaffarizadehPhysiCellOpenSource2018]](images/PhysiCell.png)
-
------
-
+:::{.columns}:::::::::
+:::{.column}:::
+![[@ghaffarizadehPhysiCellOpenSource2018]](images/PhysiCell.png){ width=60% }
+:::
+:::{.column}:::
+::: incremental
 * Friction and adhesion model
 * Very multi-agent oriented
 * Coupled with a powerfull reaction / diffusion solver,
   [BioFMV](http://biofvm.mathcancer.org/)
-
+* open development, great community
+:::
+:::
+::::::
 
 # Cells as polygons
 
-The apical junctions meshworks play a central role in many
+The apical junctions meshwork plays a central role in many
 morphogenesis events [@lecuit_cell_2007] and are poorly rendered by cell center models.
 
-![Apical junctions in Drosophila leg disk](legdisck_apical.jpeg)
-
-
-
-## Topology of epithelium
-
-### Voronoï tessalation [@hondaThreedimensionalVertexDynamics2004]
-
-Instead of focusing on the cell centers, we now look at the contact between junctions
-
-![Voronoi tessalation](images/tessalation.gif)
-
------
-
-When distances between the centers change, the tessalation changes.
-
-![Type 1 transition](images/t1_transition.png)
-
-> **Problem** we can have oscilating
-
-* Solution 1 : The active vertex model : Consider the Delaunay
-triangulation instead of it's dual [@bartonActiveVertexModel2016], and
-compute it at every step
-
-* Solution 2 : Allow for more than 3 way vertices! [@fineganTricellularVertexspecificAdhesion2019]
+![Apical junctions in Drosophila leg disk](images/legdisck_apical.jpeg){ width=60% }
 
 
 ## Mechanical Model formulations
 
 ### 2D Models
 
-* [@farhadifar_influence_2007]
+#### Influence of cell packing
 
+Quasi-static solution of:
 
-* [@biDensityindependentRigidityTransition2015]
+$$
+E = \sum_\alpha \frac{K_A}{2}(A_\alpha - A_0)^2 + \Gamma P_\alpha^2 + \sum_{ij}\Lambda \ell_{ij}
+$$
+
+:::{.columns}:::::::::
+:::{.column width=60% }:::
+![[@farhadifar_influence_2007]](images/faradifar_model.jpeg)
+:::
+:::{.column width=40% }:::
+![Phase space of cell arrangements](images/farhadifar_phasespace.png)
+
+:::
+::::::
+
+---------
+
+#### Rigidity transition
+
+![[@biDensityindependentRigidityTransition2015]](images/bietal.png)
+
+$$
+\epsilon = \sum_\alpha (a_\alpha - 1)^2 +\frac{(p_\alpha - p_0)^2}{r}
+$$
 
 ### 3D Models
 
-*
+#### Monolayer and the ECM
+
+* [@bielmeier_interface_2016] Extrapolates to 3D the 2D formulation
+
+:::{.columns}:::::::::
+:::{.column}
+![Model with ECM](images/salbreux1.jpeg)
+:::
+:::{.column}
+![Crypt formation](images/salbreux2.jpeg)
+:::
+::::::
+
+-----
+
+#### Apical junctions in 2.5D
+
+:::{.columns}:::::::::
+:::{.column width=40% }
+
+![](images/whole_leg.png)
+
+- total volume conservation
+- weigthed sum for the perimeter
+
+:::
+:::{.column width=60% }
+
+![[@martinArp23dependentMechanical2021]](images/martinetal.png){ width=80% }
+
+$$
+p'_\alpha = \frac{1}{n}\frac {\sum_{ij \in \alpha} w_{ij}\ell_{ij}}{\sum_{ij \in \alpha} w_{ij}}
+$$
+
+:::
+::::::
+
+-----
+
+#### Monlayer and bulk tissues
+
+Sophisticated expression for the friction in [@okudaThreedimensionalVertexModel2015]
+
+![Anisotropic friction regulates tissue shape](images/okudaetal.png)
 
 
-### Towards rheological models
+## Topology problems
 
-### Existing implementations
+
+![](images/t1_transition.png)
+
+> **Problem**: we can have oscillating T1 transitions
+
+> Each time this happens, we have to write the equations again
+
+-----
+
+::: incremental
+
+* Solution 1 : The active vertex model : Consider the Delaunay
+triangulation instead of it's dual [@bartonActiveVertexModel2016], and
+compute it at every step.
+
+* Solution 2 : Allow for more than 3 way vertices!
+  [@fineganTricellularVertexspecificAdhesion2019], give a finite life
+  time to those.
+
+:::
+
+### Topology gets trickier in 3D
+
+:::{.columns}:::::::::
+:::{.column width=30%}:::
+
+![I-H-O transition](images/IH_transition.png)
+
+:::
+:::{.column width=40%}:::
+
+[@okuda_reversible_2013] define rules for stable deformations
+
+![](images/okudacondition4.png)
+
+:::
+:::{.column width=30%}:::
+
+Can we generalize Tara Finegan et al. solution?
+
+![](images/rosette.png)
+:::
+::::::
+
+### Open problems
+
+:::{.columns}:::::::::
+:::{.column}:::
+::: incremental
+* Self collisions at high deformation
+* True curvature (E. Moisdon thesis)
+* Non-naive ECM
+* Nuclei
+* Many more (it's exciting!)
+:::
+:::
+:::{.column}:::
+
+![Pseudo stratified epithelium](images/2304_Pseudostratified_Epithelium.jpg)
+
+:::
+::::::
+
+
+### Existing (public) implementations
 
 * Chaste
 * Tyssue
+
+### Tank you
+
+:::{.columns}:::::::::
+:::{.column width=80% }:::
+* Sophie Theis
+* Magali Suzanne
+* Cyprien Gay
+* Audrey Ferrand & Florian Bugarin
+* The `tyssue` contributors
+* The Scipy and Python communities
+:::
+:::{.column width=20% }:::
+* ANRT
+* ERC
+* CIR
+:::
+::::::
+
+
+## References
+
+::: {#refs}
+
+:::

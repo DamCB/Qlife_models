@@ -4,9 +4,14 @@ html:
 	mkdir build_html
 	ln -s ~/Presentations/reveal.js build_html
 	cp -R images build_html
+	cp custom.css build_html
 	pandoc --citeproc \
 		   -t revealjs \
-           -s main.md \
+		   -V theme=solarized \
+	       -V disableLayout=true \
+		   -c custom.css \
+	       --csl=https://www.zotero.org/styles/current-genetics?source=1 \
+		   -s main.md \
 		   -o build_html/main.html \
            --slide-level 3 \
 	       --mathjax
