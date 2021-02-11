@@ -337,6 +337,33 @@ $$
 \epsilon = \sum_\alpha (a_\alpha - 1)^2 +\frac{(p_\alpha - p_0)^2}{r}
 $$
 
+----
+
+#### Apical junctions in 2.5D
+
+:::{.columns}:::::::::
+:::{.column width=40% }
+
+![](images/whole_leg.png)
+
+- total volume conservation
+- weigthed sum for the perimeter
+- Apico-basal traction during apoptosis
+
+:::
+:::{.column width=60% }
+
+![[@martinArp23dependentMechanical2021]](images/martinetal.png){ width=80% }
+
+$$
+p'_\alpha = \frac{1}{n}\frac {\sum_{ij \in \alpha} w_{ij}\ell_{ij}}{\sum_{ij \in \alpha} w_{ij}}
+$$
+
+:::
+::::::
+
+-----
+
 ### 3D Models
 
 #### Monolayer and the ECM
@@ -354,35 +381,20 @@ $$
 
 -----
 
-#### Apical junctions in 2.5D
-
-:::{.columns}:::::::::
-:::{.column width=40% }
-
-![](images/whole_leg.png)
-
-- total volume conservation
-- weigthed sum for the perimeter
-
-:::
-:::{.column width=60% }
-
-![[@martinArp23dependentMechanical2021]](images/martinetal.png){ width=80% }
-
-$$
-p'_\alpha = \frac{1}{n}\frac {\sum_{ij \in \alpha} w_{ij}\ell_{ij}}{\sum_{ij \in \alpha} w_{ij}}
-$$
-
-:::
-::::::
-
------
 
 #### Monlayer and bulk tissues
 
 Sophisticated expression for the friction in [@okudaThreedimensionalVertexModel2015]
 
 ![Anisotropic friction regulates tissue shape](images/okudaetal.png)
+
+-----
+
+#### Cells as foam
+
+Consider surface tension and Laplace foce balance
+
+![[@maitreAsymmetricDivisionContractile2016]](images/turlieretal.png)
 
 
 ## Topology problems
