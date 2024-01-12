@@ -1,21 +1,12 @@
 ---
-title: "Modeling tissues: numerical simulations and continuum mechanics"
-author: Guillaume Gay, CENTURI multi-engineering platform, Marseille
-subtitle: Part II - Numerical Simulations
+title: An overview of tissue modelling approaches
+author: Guillaume Gay, France BioImaging, Montpellier
 fontsize: 10pt
 width: 1080
 height: 800
-font-size: 10pt
 bibliography: tyssue.bib
 data-transition: none
 center: 1
-abstract:
-    "In this second part of the course, we will go over the various methods used to simulate tissues.
-    We will start by showing a rough taxonomy of cell models in general and we'll briefly discuss the general framework of agent-based modelling.  Then we will see in some details the three big classes of tissue modeling strategies:
-    1. Lattice based models rely on a descretized space to simulate cells. Each cell here occupies a set of pixels, and the physics of the system is solved locally. Those model are adapted to rapid assessment of tissue dynamics with mixed cell types, proliferation and differentiation models.
-    2. Cell-center based models. Here each cell is an individual sphere (maybe deformable) interacting in free space with it's immediate neighbours. This class of model is adapted to problems in cancer biology, involving high cell numbers.
-    4. Vertex-based models. Here cells are delinated by polygons or polyhedron, and the phyics is applied at the polygon vertices. This class of models is widely used for morphogenesis modeling.
-    For each section, we'll look at published examples and point towards available implementations."
 ...
 
 
@@ -27,7 +18,7 @@ abstract:
 ::::::{.columns}:::
 :::{.column width=70%}
 \vspace{2cm}
-This courses relies a lot on Carlos Tamulonis'
+This presentation relies a lot on Carlos Tamulonis'
 
 [PhD Thesis](https://hdl.handle.net/11245/1.394902) (2013)
 :::
@@ -91,7 +82,7 @@ This courses relies a lot on Carlos Tamulonis'
 ### The Modified Metropolis Algorithm
 
 
-The behavior is governed by the definition of a **Hamiltonian** $H$ governing the energy of the cells
+The behavior is governed by the definition of a **Hamiltonian** $H$
 
 :::::::::{.columns}:::
 :::{.column width=60%}::::
@@ -142,9 +133,6 @@ $J\left(\tau(ij), \tau(i'j')\right)$ : bond energy
 
 #### Cell sorting
 
-:::{.columns}::::
-:::{.column width=70% }
-
 A classical problem:
 
 2 cell types $(1, 2)$ --- $0$ is the medium
@@ -157,11 +145,9 @@ J(2, 1) & = & 16\\
 J(1, 0) & = &  J(2, 0) = 32
 \end{eqnarray*}
 
-:::
-:::{.column width=30% }
-![](images/CC3D.png){ width=80% }
-:::
-:::::::
+<hr/>
+
+![](images/CC3D.png){ width=60% }
 
 ### Chemotaxis
 
@@ -188,12 +174,6 @@ $$
 :::
 ::::::
 
-### Existing Software
-
-- Chaste
-- CompuCell3D
-- Morpheus
-
 
 # Cells as spheres
 
@@ -215,69 +195,6 @@ $$
 :::
 ::::::
 
-
-## Cells as dipoles
-
-:::{.columns}:::
-:::{.column}:::
-
-![](images/joanny_model.png)
-
-![](images/joanny_curve.png)
-
-:::
-:::{.column}:::
-- Cell-cell interactions:
-
-$$
-V^{CC}(r) = \begin{cases}
-    A R_{cc}^5 / r_k^4 + B r_k &\quad r_k \leq R_{pp}\\
-    0 &\quad r_k > R_{pp}\\
-    \end{cases}
-$$
-
-- Self-interaction (growth):
-
-$$
-V^G(r) = \frac{B}{r_i + r_0}
-$$
-
-:::
-::::::
-
-
-
-----
-
-
-![Fluidization [@ranftFluidizationTissuesCell2010]](images/joanny.png)
-
-> Due to proliferation and death, cell aggreagate behaves as a fluid
-
-
-## Modeling tumors
-
-- Spheres with adhesion and repulsion
-
-![[@drasdoSinglecellbasedModelTumor2005]](images/drasdo1.png){ width=60% }
-
-- Same Metropolis alorithm as GGH:
-
-$$
-P(\delta r) = \min \{ 1, \exp \frac{- (V(t + dt) - V(t))}{F_T} \}
-$$
-
-## Mixed resolution models
-
-- Deformable cells at high resolution meshes mixed with cell-based model
-
-![[@vanliedekerkeQuantitativeHighresolutionComputational2020]](images/drasdo2.png)
-
-- Continuous / fluid dynamics finite elements for cells
-- Very "realistic" results
-- High computational cost
-
-
 ## PhysiCell (Mathematical Oncology)
 
 [Physicell](https://physicell.wordpress.com/about-2/) is a very powerfull simulation toolkit
@@ -292,10 +209,10 @@ $$
 * Very multi-agent oriented
 * Coupled with a powerfull reaction / diffusion solver,
   [BioFMV](http://biofvm.mathcancer.org/)
-* open development, great community
 :::
 :::
 ::::::
+
 
 # Cells as polygons
 
@@ -327,7 +244,6 @@ $$
 :::
 ::::::
 
----------
 
 #### Rigidity transition
 
@@ -337,7 +253,6 @@ $$
 \epsilon = \sum_\alpha (a_\alpha - 1)^2 +\frac{(p_\alpha - p_0)^2}{r}
 $$
 
-----
 
 #### Apical junctions in 2.5D
 
@@ -362,7 +277,6 @@ $$
 :::
 ::::::
 
------
 
 ### 3D Models
 
@@ -379,8 +293,6 @@ $$
 :::
 ::::::
 
------
-
 
 #### Monlayer and bulk tissues
 
@@ -388,7 +300,6 @@ Sophisticated expression for the friction in [@okudaThreedimensionalVertexModel2
 
 ![Anisotropic friction regulates tissue shape](images/okudaetal.png)
 
------
 
 #### Cells as foam
 
@@ -397,61 +308,38 @@ Consider surface tension and Laplace foce balance
 ![[@maitreAsymmetricDivisionContractile2016]](images/turlieretal.png)
 
 
-## Topology problems
+# Finite elements approaches
+
+## Active surfaces
+
+Interacting active surfaces: detailed model of the cell cortex
+
+![[Torres-Sánchez et al 2022](https://doi.org/10.1371/journal.pcbi.1010762)](images/torrez-sanchez2023.png){ width=70% }
+
+## Mixed resolution models
+
+- Deformable cells at high resolution meshes mixed with cell-based model
+
+![[@vanliedekerkeQuantitativeHighresolutionComputational2020]](images/drasdo2.png)
+
+- Continuous / fluid dynamics finite elements for cells
+- Very "realistic" results
+- High computational cost
 
 
-![](images/t1_transition.png)
+-------
 
-> **Problem**: we can have oscillating T1 transitions
 
-> Each time this happens, we have to write the equations again
-
------
-
-::: incremental
-
-* Solution 1 : The active vertex model : Consider the Delaunay
-triangulation instead of it's dual [@bartonActiveVertexModel2016], and
-compute it at every step.
-
-* Solution 2 : Allow for more than 3 way vertices!
-  [@fineganTricellularVertexspecificAdhesion2019], give a finite life
-  time to those.
-
-:::
-
-### Topology gets trickier in 3D
-
-:::{.columns}:::::::::
-:::{.column width=30%}:::
-
-![I-H-O transition](images/IH_transition.png)
-
-:::
-:::{.column width=40%}:::
-
-[@okuda_reversible_2013] define rules for stable deformations
-
-![](images/okudacondition4.png)
-
-:::
-:::{.column width=30%}:::
-
-Can we generalize Tara Finegan et al. solution?
-
-![](images/rosette.png)
-:::
-::::::
 
 ### Open problems
 
 :::{.columns}:::::::::
 :::{.column}:::
 ::: incremental
-* Self collisions at high deformation
-* True curvature (E. Moisdon thesis)
+* Topology and remeshing in 3D vertex models
 * Non-naive ECM
 * Nuclei
+* Combining molecular / particle dynamics and FE models?
 * Many more (it's exciting!)
 :::
 :::
@@ -463,28 +351,12 @@ Can we generalize Tara Finegan et al. solution?
 ::::::
 
 
-### Existing (public) implementations
-
-* Chaste
-* Tyssue
-
 ### Tank you
 
-:::{.columns}:::::::::
-:::{.column width=80% }:::
-* Sophie Theis
-* Magali Suzanne
+* Magali Suzanne and her team
 * Cyprien Gay
-* Audrey Ferrand & Florian Bugarin
 * The `tyssue` contributors
 * The Scipy and Python communities
-:::
-:::{.column width=20% }:::
-* ANRT
-* ERC
-* CIR
-:::
-::::::
 
 
 ## References
